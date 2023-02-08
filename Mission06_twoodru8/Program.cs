@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Mission06_twoodru8.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var connectionString = builder.Configuration.GetConnectionString("MovieDBConnection");
+builder.Services.AddDbContext<MovieFormDBContext>(x => x.UseSqlite(connectionString));
 
 var app = builder.Build();
 
