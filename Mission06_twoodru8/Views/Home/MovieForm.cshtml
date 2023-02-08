@@ -51,6 +51,7 @@
 		<label class="form-label" asp-for="Notes">Notes:</label>
 		<input class="form-control" asp-for="Notes" /><br />
 
+		@*This will be where the errors are thrown from the model, if there are any*@
 		<div asp-validation-summary="All" id="errors"></div>
 
 		<button type="submit" class="btn btn-success">Submit</button>

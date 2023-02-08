@@ -5,29 +5,35 @@ namespace Mission06_twoodru8.Models
 {
 	public class MovieFormDBContext : DbContext
 	{
-
+		//Setting the title of the table
 		public DbSet<MovieFormModel>? Responses { get; set; }
 
+		//Adding a Interface of the configuration
 		protected readonly IConfiguration Configuration;
 
+		//setting the configuration to this classes config
 		public MovieFormDBContext(IConfiguration configuration)
 		{
 			Configuration = configuration;
 		}
 
+		//overriding the DBContext onconfiguring method and setting up all the connection strings etc
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 		{
+			//building the configuration adding the appsettings.json and then building that so that then we can access the connection string
 			var configuration = new ConfigurationBuilder()
 				.SetBasePath(Directory.GetCurrentDirectory())
 				.AddJsonFile("appsettings.json")
 				.Build();
-
+			//grabbing connection string
 			var connectionString = configuration.GetConnectionString("MovieDBConnection");
+			//using sqlite with our connection
 			options.UseSqlite(connectionString);
 		}
 
 		protected override void OnModelCreating(ModelBuilder mb)
 		{
+			//Seeding the data with my 3 favorite movies
 			mb.Entity<MovieFormModel>().HasData(
 				
 				new MovieFormModel

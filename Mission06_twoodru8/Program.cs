@@ -5,7 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//This is getting the connection
 var connectionString = builder.Configuration.GetConnectionString("MovieDBConnection");
+//Then building the service which will add the dbcontext.
 builder.Services.AddDbContext<MovieFormDBContext>(x => x.UseSqlite(connectionString));
 
 var app = builder.Build();
